@@ -8,14 +8,9 @@
  * 
  */
 
-var  http    = require("http");
-var  https   = require('https');
-var  url     = require("url");
-var  config  = require("./Config");
-var  fs      = require('fs');
-var  decoder = require("string_decoder").StringDecoder;
-var  { router , handler } = require('./Routes');
+
 var   CustomeException  = require('./CustomException') ;
+
 
 
 
@@ -142,9 +137,31 @@ class UnifiedServer{
         };
 
 
-        console.log(data);
+       if(this.router && this.handler ){
 
-        res.end("good job David !!! ");
+        this.choosenRoute = typeof this.router[this.trimmed_path] !== 'undefined' ? this.router[this.trimmed_path] : this.handler.notFound ;
+
+        this.choosenRoute(data , (statusCode , payload )=> {
+
+            statusCode  = typeof statusCode == 'number' ? statusCode : 200;
+            payload     = typeof payload    == 'object' ? payload    : {} ;
+            let payload_string  =  JSON.stringify(payload);
+            res.setHeader("Content-Type" , "application/json") ;
+            res.writeHead(statusCode) ;
+            res.end(payload_string);
+
+
+         });
+
+       }else{
+        
+        console.error("invalid route handler for:", this.trimmed_path);
+        res.writeHead(500);
+        res.end(JSON.stringify({ error: "Internal Server Error" }));
+
+       }
+
+       
 
       });
           
@@ -209,26 +226,12 @@ class UnifiedServer{
 
 
 
-// console.log(http) ;
 
-        try{
 
-            var server = new  UnifiedServer( { http  , url , decoder  , config , fs , router , handler });
-            console.log("function executed successfully:", server );
-            server.startServer();
-            UnifiedServer.setSSl(server , './../https/key.pem' , "./../https/cert.pem");
-            UnifiedServer.setHttps(server , https );
-            server.startSecuredServer();
-            
 
-        }catch(e){
 
-            console.log()
-            console.error("an error occurred :", e.message); 
-            console.error(e.stack);
+       
 
-        }finally{
 
-            console.log("test 5 "); 
 
-        }
+module.exports =  UnifiedServer ;

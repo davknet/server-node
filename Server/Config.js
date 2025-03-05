@@ -13,8 +13,9 @@ environment.staging = {
 
     'httpPort'  : 3000 ,
     'httpsPort' : 3001 ,
-    'envName'   : 'staging'
-
+    'envName'   : 'staging' ,
+     'key'      : './https/key.pem' ,
+    'cert'      : './https/cert.pem'
 };
 
 
@@ -24,7 +25,9 @@ environment.production = {
 
     'httpPort'  : 5000 ,
     'httpsPort' : 5001 ,
-    'envName'   : 'production' 
+    'envName'   : 'production' ,
+    'key'       : './https/key.pem' ,
+    'cert'      : './https/cert.pem'
 };
 
 
