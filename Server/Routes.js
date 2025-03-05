@@ -15,7 +15,7 @@ var handler = {};
 
 handler.api_base_user_data = function (data , calback ){
 
-    console.log( data.buffer ) ; 
+    console.log( data.buffer )   ; 
     const userData = data.buffer ;
 
     calback( 200 ,  { "user" : userData }  ) ;

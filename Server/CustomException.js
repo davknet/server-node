@@ -25,4 +25,4 @@
 
 
 
-module.exports = { CustomException };
+module.exports =  CustomException ;
