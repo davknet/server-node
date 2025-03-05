@@ -1,8 +1,8 @@
 /**
  * Simple Node.js Server using ES6 Classes
  * 
- * Developed by: [Your Name]
- * Date: [Today's Date]
+ * Developed by: David Kahadze 
+ * Date: 5 march 2025 
  * License: MIT
  * 
  * Description:
