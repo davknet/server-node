@@ -9,8 +9,7 @@
 
 
 
-
-export class CustomException extends Error{
+ class CustomException extends Error{
 
     constructor( message , statusCode ){
 
@@ -23,3 +22,7 @@ export class CustomException extends Error{
 
 
 }
+
+
+
+module.exports = { CustomException };
